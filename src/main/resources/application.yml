@@ -1,0 +1,24 @@
+server:
+  port: ${PORT:8081}
+
+spring:
+  application:
+    name: patient-service
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://ep-frosty-paper-bb4zuk5w.c-15.us-east-1.aws.neon.tech:5432/neondb?sslmode=require&currentSchema=schema_pacientes}
+    username: ${SPRING_DATASOURCE_USERNAME:neondb_owner}
+    password: ${SPRING_DATASOURCE_PASSWORD:npg_9xhmaSHRg5jv}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 4
+      minimum-idle: 1
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        # Crea el schema en Neon si aun no existe (sin esto: ERROR: schema "..." does not exist)
+        hbm2ddl:
+          create_namespaces: true
+        default_schema: schema_pacientes
